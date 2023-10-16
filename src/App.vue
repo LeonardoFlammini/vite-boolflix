@@ -22,7 +22,7 @@ export default {
         
         store.responseMessage = "Nessun film cercato"
       }else{
-        axios.get('store.apiUrlSearchFilm',{
+        axios.get(store.apiUrlSearchFilm ,{
           params:{
             api_key: store.apiKey,
             query: store.filmToSearch
