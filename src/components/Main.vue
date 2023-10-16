@@ -16,6 +16,7 @@ export default {
       <h1 v-if="store.isHome">Cerca Film</h1>
       <div v-else class="film-container">
         <h1>Film</h1>
+        <h3>{{ store.responseMessage }}</h3>
         <div class="film-wrapper container-fluid my-3">
           <div class="row row-cols-5"></div>
         </div>

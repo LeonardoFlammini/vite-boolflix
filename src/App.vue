@@ -16,14 +16,38 @@ export default {
   },
   methods:{
     searchFilm(){
-
+      store.isHome = false;
+      
+      if(store.filmToSearch === null){
+        
+        store.responseMessage = "Nessun film cercato"
+      }else{
+        axios.get('store.apiUrlSearchFilm',{
+          params:{
+            api_key: store.apiKey,
+            query: store.filmToSearch
+          }
+        })
+          .then(res =>{
+            console.log(res);
+          })
+          .catch(err => {
+            store.responseMessage = "Nessun Film trovato"
+            console.log(err);
+          })
     }
+      }
+  },
+  mounted(){
+    store.isHome = true;
   }
 }
 </script>
 
 <template>
-  <Header />
+  <Header
+  @searchFilm="searchFilm()" 
+  />
   <Main />
 </template>
 

@@ -1,8 +1,12 @@
 <script>
-
+import {store} from "../data/store"
 export default {
   name: "Header",
-  
+  data(){
+    return{
+      store
+    }
+  }
 }
 </script>
 
@@ -12,7 +16,13 @@ export default {
       <img src="logo-boolflix.png" alt="logo">
     </div>
     <div class="inputs">
-      <input type="text" class="form-control" id="search" placeholder="Cerca qui...">
+      <input
+        @keyup.enter="$emit('searchFilm')"
+        v-model="store.filmToSearch"
+        type="text"
+        class="form-control"
+        id="search"
+        placeholder="Cerca qui...">
       <select class="form-select" name="select" id="select">
       <option selected value="0">Seleziona tipo</option>
     </select>
