@@ -16,33 +16,35 @@ export default {
   },
   methods:{
     getApi(type){
-      
-      if(store.filmToSearch === null){
+      if(store.query === ''){
+        console.log("Nessun film cercato");
         store.responseMessage = "Nessun film cercato"
       }else{
+        console.log(store.query);
         axios.get(store.apiUrl + type ,{
           params:{
             api_key: store.apiKey,
-            query: store.filmToSearch,
-            language: 'it-IT'
+            query: store.query,
+            language: store.language
           }
         })
           .then(res =>{
             store[type] = res.data.results;
+            store.query = "";
+            console.log(store[type]);
           })
           .catch(err => {
-            store.responseMessage = "Nessun Film trovato"
+            store.responseMessage = "Nessun Film trovato";
+            store.query = "";
           })
       }
     },
     searchFilm(){
       this.getApi('movie');
       this.getApi('tv');
-      console.log(store.movie,store.tv);
+      // console.log(store.movie,store.tv);
     }
     
-  },
-  mounted(){
   }
 }
 </script>

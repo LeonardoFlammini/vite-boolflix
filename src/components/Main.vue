@@ -1,11 +1,15 @@
 <script>
 import {store} from "../data/store"
+import Wrapper from "./Wrapper.vue"
 export default {
   name:"Main",
   data(){
     return{
       store
     }
+  },
+  components:{
+    Wrapper
   }
 }
 </script>
@@ -13,13 +17,14 @@ export default {
 <template>
   <main>
     <div class="container my-5">
-      <div v-if="store.movie.length > 0" class="film-container">
-        <h1>{{ store.filmToSearch }}</h1>
-        <h3>{{ store.responseMessage }}</h3>
-        <div class="film-wrapper container-fluid my-3">
-          <div class="row row-cols-5"></div>
-        </div>
-      </div>
+      <Wrapper
+        v-if="store.movie.length > 0"
+        title="movie"
+        />
+      <Wrapper
+        v-if="store.tv.length > 0"
+        title="tv"
+        />
       <h1 v-else>Cerca Film</h1>
     </div>
   </main>
