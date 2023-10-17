@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-  <div  class="film-container">
+  <div  class="film-container my-5">
         <h1>{{ title }}</h1>
         <h3>{{ store.responseMessage }}</h3>
         <div class="film-wrapper container-fluid my-3">
@@ -37,5 +37,8 @@ export default {
 
 
 <style scoped lang="scss">
-
+h1{
+  font-weight: bold;
+  text-transform: capitalize;
+}
 </style>

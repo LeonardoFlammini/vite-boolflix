@@ -17,10 +17,9 @@ export default {
   methods:{
     getApi(type){
       if(store.query === ''){
-        console.log("Nessun film cercato");
         store.responseMessage = "Nessun film cercato"
+        store[type] = [];
       }else{
-        console.log(store.query);
         axios.get(store.apiUrl + type ,{
           params:{
             api_key: store.apiKey,
@@ -29,20 +28,35 @@ export default {
           }
         })
           .then(res =>{
+            store.responseMessage = ""
             store[type] = res.data.results;
             store.query = "";
-            console.log(store[type]);
           })
           .catch(err => {
             store.responseMessage = "Nessun Film trovato";
+            store[type] = [];
             store.query = "";
           })
       }
     },
+    cleanArrays(){
+      store.movie = [];
+      store.tv = [];
+    },
     searchFilm(){
-      this.getApi('movie');
-      this.getApi('tv');
-      // console.log(store.movie,store.tv);
+      this.cleanArrays();
+      switch(store.selectedValue){
+        case "all":
+          this.getApi('movie');
+          this.getApi('tv');
+          break;
+        case "movie":
+          this.getApi('movie');
+          break;
+        case "tv":
+          this.getApi('tv');
+          break;
+      }
     }
     
   }

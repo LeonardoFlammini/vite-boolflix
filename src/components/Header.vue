@@ -23,9 +23,16 @@ export default {
         class="form-control"
         id="search"
         placeholder="Cerca qui...">
-      <select class="form-select" name="select" id="select">
-      <option selected value="0">Seleziona tipo</option>
-    </select>
+      <select
+        v-model="store.selectedValue"
+        class="form-select"
+        name="select"
+        id="select"
+      >
+        <option selected value="all">All</option>
+        <option value="movie">Movies</option>
+        <option value="tv">Tv's</option>
+      </select>
     </div>
   </header>
 </template>

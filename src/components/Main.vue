@@ -25,7 +25,10 @@ export default {
         v-if="store.tv.length > 0"
         title="tv"
         />
-      <h1 v-else>Cerca Film</h1>
+      <div v-else>
+        <h1>Cerca Film</h1>
+        <h3>{{ store.responseMessage }}</h3>
+      </div>
     </div>
   </main>
 </template>
