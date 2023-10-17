@@ -15,31 +15,34 @@ export default {
     }
   },
   methods:{
-    searchFilm(){
-      store.isHome = false;
+    getApi(type){
       
       if(store.filmToSearch === null){
-        
         store.responseMessage = "Nessun film cercato"
       }else{
-        axios.get(store.apiUrlSearchFilm ,{
+        axios.get(store.apiUrl + type ,{
           params:{
             api_key: store.apiKey,
-            query: store.filmToSearch
+            query: store.filmToSearch,
+            language: 'it-IT'
           }
         })
           .then(res =>{
-            console.log(res);
+            store[type] = res.data.results;
           })
           .catch(err => {
             store.responseMessage = "Nessun Film trovato"
-            console.log(err);
           })
-    }
       }
+    },
+    searchFilm(){
+      this.getApi('movie');
+      this.getApi('tv');
+      console.log(store.movie,store.tv);
+    }
+    
   },
   mounted(){
-    store.isHome = true;
   }
 }
 </script>

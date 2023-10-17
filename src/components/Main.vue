@@ -13,14 +13,14 @@ export default {
 <template>
   <main>
     <div class="container my-5">
-      <h1 v-if="store.isHome">Cerca Film</h1>
-      <div v-else class="film-container">
-        <h1>Film</h1>
+      <div v-if="store.movie.length > 0" class="film-container">
+        <h1>{{ store.filmToSearch }}</h1>
         <h3>{{ store.responseMessage }}</h3>
         <div class="film-wrapper container-fluid my-3">
           <div class="row row-cols-5"></div>
         </div>
       </div>
+      <h1 v-else>Cerca Film</h1>
     </div>
   </main>
 </template>
