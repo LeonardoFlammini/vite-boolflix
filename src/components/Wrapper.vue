@@ -1,6 +1,6 @@
 <script>
 import {store} from "../data/store"
-import Card from "./Card.vue"
+import Card from "./CardLF.vue"
 export default {
   name:"Wrapper",
   data(){
@@ -29,6 +29,7 @@ export default {
               :title="item.title || item.name"
               :overView="item.overview"
               :imgPath="item.poster_path"
+              :originalLanguage="item.original_language"
             />
           </div>
         </div>

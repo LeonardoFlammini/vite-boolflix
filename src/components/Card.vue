@@ -4,7 +4,8 @@ export default {
   props:{
     title: String,
     overView: String,
-    imgPath: String
+    imgPath: String,
+    originalLanguage: String
   }
 }
 </script>
@@ -12,7 +13,7 @@ export default {
 <template>
   <div class="col d-flex" >
     <div class = "card-lf">
-      <img v-if="imgPath" :src="`https://image.tmdb.org/t/p/original/${imgPath}`" alt="">
+      <img v-if="imgPath" class="poster" :src="`https://image.tmdb.org/t/p/original/${imgPath}`" alt="">
       <div v-else class="no-img"><i class="fa-solid fa-film"></i></div>
       <div class="card-content-lf">
         <h2>
@@ -21,6 +22,14 @@ export default {
         <p v-if="overView">
           {{ overView }}
         </p>
+        <img
+          class="flag"
+          :src="`https://flagcdn.com/16x12/${originalLanguage}.png`"
+          :srcset="`https://flagcdn.com/32x24/${originalLanguage}.png 2x`,
+            `https://flagcdn.com/48x36/${originalLanguage}.png 3x`"
+          width="16"
+          height="12"
+          :alt="`${originalLanguage}`">
         
       </div>
     </div>
@@ -62,7 +71,7 @@ $color-primary-white: rgb(240, 240, 240);
     color: lighten($main-bg, 20%);
   }
  
-  img {
+  .poster {
     position: absolute;
     object-fit: cover;
     width: 100%;
@@ -78,7 +87,6 @@ $color-primary-white: rgb(240, 240, 240);
     inset: auto auto 30px 30px;
     margin: 0;
     transition: inset .3s .3s ease-out;
-    // font-family: 'Roboto Condensed', sans-serif;
     font-weight: normal;
     text-transform: uppercase;
   }
