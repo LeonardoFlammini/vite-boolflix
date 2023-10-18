@@ -17,7 +17,7 @@ export default {
     </div>
     <div class="inputs">
       <input
-        @keyup.enter="$emit('searchFilm')"
+        @keyup.enter="$emit('search')"
         v-model.trim="store.query"
         type="text"
         class="form-control"

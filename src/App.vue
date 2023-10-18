@@ -43,8 +43,7 @@ export default {
       store.movie = [];
       store.tv = [];
     },
-    searchFilm(){
-      this.cleanArrays();
+    selectValueSearch(){
       switch(store.selectedValue){
         case "all":
           this.getApi('movie');
@@ -57,6 +56,10 @@ export default {
           this.getApi('tv');
           break;
       }
+    },
+    search(){
+      this.cleanArrays();
+      this.selectValueSearch();
     }
     
   }
@@ -65,7 +68,7 @@ export default {
 
 <template>
   <Header
-  @searchFilm="searchFilm()" 
+  @search="search()" 
   />
   <Main />
 </template>
