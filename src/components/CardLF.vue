@@ -1,11 +1,27 @@
 <script>
+import {store} from "../data/store"
+import Stars from "./Stars.vue"
 export default {
   name:"CardLF",
+  data(){
+    return{
+      store
+    }
+  },
   props:{
     title: String,
     overView: String,
     imgPath: String,
-    originalLanguage: String
+    originalLanguage: String,
+    vote: Number
+  },
+  components:{
+    Stars
+  },
+  methods:{
+    getImagePath(lang){
+      return new URL ( `/public/country-4x3/${lang}.svg`, import.meta.url ).href;
+    }
   }
 }
 </script>
@@ -13,25 +29,28 @@ export default {
 <template>
   <div class="col d-flex" >
     <div class="card-container-lf">
-      <!-- <div class="poster">
+      <div class="poster">
         <img v-if="imgPath" class="poster-img" :src="`https://image.tmdb.org/t/p/original/${imgPath}`" :alt="`${title}`">
         <div v-else class="no-img"><i class="fa-solid fa-film"></i></div>
-      </div> -->
+      </div>
       
       <div class="info-box">
         <h3 class="title">{{ title }}</h3>
-        <div class="rating">Voto</div>
+        <Stars
+          :vote="vote"
+        />
         <div class="flag">
-          <img 
+          <!-- <img 
             :src="`https://flagcdn.com/16x12/${originalLanguage}.png`"
             :srcset="`https://flagcdn.com/32x24/${originalLanguage}.png 2x,
               https://flagcdn.com/48x36/${originalLanguage}.png 3x`"
             width="16"
             height="12"
             :alt="`${originalLanguage}`"
-          >
+          > -->
+          <img v-if="store.languages.includes(originalLanguage)" :src="getImagePath(originalLanguage)" :alt="originalLanguage">
         </div>
-        <p class="overview">{{ overView }}</p>
+        <div v-if="overView" class="overview">{{ overView }}</div>
       </div>
     </div>
   </div>
@@ -49,7 +68,15 @@ export default {
   position: relative;
   box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
   color: black;
+  &:hover .poster{
+      opacity: .2;
+    }
+  &:hover .info-box{
+    top: 20%;
+  }
   .poster{
+    width: 100%;
+    height: 100%;
     .poster-img {
       position: absolute;
       object-fit: cover;
@@ -72,25 +99,29 @@ export default {
     }
   }
   .info-box{
+    padding: 20px;
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    top: 100%;
     left: 0;
-    background-color: rgba($color: #000000, $alpha: .2);
+    transition: all .7s;
+    color: white;
     .flag{
       width: 16px;
       height: 12px;
     }
-    p {
+    .overview {
+      margin-top: 30px;
       display: block;
-      height: 100px;
+      height: 250px;
       inset: auto auto 80px 30px;
-      overflow: auto;
-      border: 1px solid white;
+      overflow: auto; 
       border-radius: 15px;
       padding: 5px;
+      background-color: rgba($color: #000000, $alpha: .2);
     }
+    
   } 
 }
 </style>
